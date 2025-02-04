@@ -1,5 +1,35 @@
-<div class="login-container">
-    <h2>Login</h2>
-    <p>Bem-vindo! Faça seu login para acessar o sistema.</p>
-</div>
+<form class="example-form">
+    <!-- Campo de E-mail -->
+    <mat-form-field class="example-full-width">
+      <mat-label>Email</mat-label>
+      <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+             placeholder="Ex. seunome@example.com">
+      <mat-hint>Os erros aparecem instantaneamente!</mat-hint>
+      
+      <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+        Por favor, insira um email válido.
+      </mat-error>
+      <mat-error *ngIf="emailFormControl.hasError('required')">
+        O email é <strong>obrigatório</strong>.
+      </mat-error>
+    </mat-form-field>
+  
+    <!-- Campo de Senha -->
+    <mat-form-field class="example-full-width">
+      <mat-label>Senha</mat-label>
+      <input type="password" matInput [formControl]="passwordFormControl" [errorStateMatcher]="matcher"
+             placeholder="Use uma senha com letras e números" maxlength="8">
+      <mat-hint>A senha deve ter entre 5 e 8 caracteres.</mat-hint>
+  
+      <mat-error *ngIf="passwordFormControl.hasError('minlength')">
+        A senha deve ter no mínimo 5 caracteres.
+      </mat-error>
+      <mat-error *ngIf="passwordFormControl.hasError('maxlength')">
+        A senha deve ter no máximo 8 caracteres.
+      </mat-error>
+      <mat-error *ngIf="passwordFormControl.hasError('required')">
+        A senha é <strong>obrigatória</strong>.
+      </mat-error>
+    </mat-form-field>
+</form>
   
