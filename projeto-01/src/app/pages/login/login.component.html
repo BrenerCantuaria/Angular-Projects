@@ -1,35 +1,56 @@
-<form class="example-form">
-    <!-- Campo de E-mail -->
-    <mat-form-field class="example-full-width">
-      <mat-label>Email</mat-label>
-      <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
-             placeholder="Ex. seunome@example.com">
-      <mat-hint>Os erros aparecem instantaneamente!</mat-hint>
-      
-      <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-        Por favor, insira um email válido.
-      </mat-error>
-      <mat-error *ngIf="emailFormControl.hasError('required')">
-        O email é <strong>obrigatório</strong>.
-      </mat-error>
-    </mat-form-field>
+<div class="h-screen flex items-center justify-center bg-gray-100">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-96">
+      <h2 class="text-2xl font-semibold text-center mb-4 text-gray-800">Login</h2>
   
-    <!-- Campo de Senha -->
-    <mat-form-field class="example-full-width">
-      <mat-label>Senha</mat-label>
-      <input type="password" matInput [formControl]="passwordFormControl" [errorStateMatcher]="matcher"
-             placeholder="Use uma senha com letras e números" maxlength="8">
-      <mat-hint>A senha deve ter entre 5 e 8 caracteres.</mat-hint>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-8">
+        <!-- Campo de Email -->
+        <p-floatLabel>
+          <input
+            pInputText
+            id="email"
+            type="email"
+            formControlName="email"
+            autocomplete="off"
+            class="w-full"
+          />
+          <label for="email">E-mail</label>
+        </p-floatLabel>
+        <small class="text-red-500" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+          E-mail inválido
+        </small>
   
-      <mat-error *ngIf="passwordFormControl.hasError('minlength')">
-        A senha deve ter no mínimo 5 caracteres.
-      </mat-error>
-      <mat-error *ngIf="passwordFormControl.hasError('maxlength')">
-        A senha deve ter no máximo 8 caracteres.
-      </mat-error>
-      <mat-error *ngIf="passwordFormControl.hasError('required')">
-        A senha é <strong>obrigatória</strong>.
-      </mat-error>
-    </mat-form-field>
-</form>
+        <!-- Campo de Senha -->
+        <p-floatLabel>
+          <input
+            pInputText
+            id="password"
+            type="password"
+            formControlName="password"
+            autocomplete="off"
+            class="w-full"
+          />
+          <label for="password">Senha</label>
+        </p-floatLabel>
+        <small class="text-red-500" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+          A senha deve ter pelo menos 6 caracteres
+        </small>
+  
+        <!-- Botão de Login -->
+        <button
+          pButton
+          type="submit"
+          label="Entrar"
+          class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg"
+          [disabled]="loginForm.invalid"
+        >
+        Entrar
+        </button>
+      </form>
+  
+      <!-- Link de Esqueci minha senha -->
+      <div class="text-center mt-4">
+        <a href="#" class="text-blue-500 hover:underline">Esqueci minha senha</a>
+      </div>
+    </div>
+  </div>
   

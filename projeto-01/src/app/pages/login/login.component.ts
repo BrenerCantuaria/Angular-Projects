@@ -1,33 +1,31 @@
 import { Component } from '@angular/core';
-import {
-  FormControl,
-  Validators,
-  FormsModule,
-  ReactiveFormsModule,
-} from '@angular/forms';
-
-import { ErrorStateMatcher } from '@angular/material/core';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
-
-/** Personalização de erro para validação */
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null): boolean {
-    return !!(control && control.invalid && (control.dirty || control.touched));
-  }
-}
-
+import { InputTextModule } from 'primeng/inputtext';
+import { FormsModule } from '@angular/forms';
+import { FloatLabel } from 'primeng/floatlabel';
+import { FormBuilder, FormGroup, Validators,ReactiveFormsModule } from '@angular/forms';
 @Component({
   selector: 'app-login',
-  standalone: true,
+  imports: [CommonModule,InputTextModule,FormsModule,FloatLabel,ReactiveFormsModule],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
-  imports: [CommonModule, FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule],
+  styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-  passwordFormControl = new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(8)]);
+  value1: string | undefined;
+  loginForm: FormGroup;
 
-  matcher = new MyErrorStateMatcher();
+  constructor(private fb: FormBuilder) {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+    });
+  }
+
+  onSubmit() {
+    if (this.loginForm.valid) {
+      console.log('Formulário válido:', this.loginForm.value);
+    } else {
+      console.log('Formulário inválido');
+    }
+  }
 }
