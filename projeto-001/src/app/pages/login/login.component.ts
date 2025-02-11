@@ -10,7 +10,7 @@ import { FloatLabelModule } from 'primeng/floatlabel';
   standalone: true, // ✅ Define que este componente é standalone
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  imports: [CommonModule, ReactiveFormsModule, InputTextModule, ButtonModule, FloatLabelModule], // ✅ Importa os módulos necessários
+  imports: [CommonModule, ReactiveFormsModule, InputTextModule, ButtonModule, FloatLabelModule], 
 })
 export class LoginComponent {
   loginForm: FormGroup;
