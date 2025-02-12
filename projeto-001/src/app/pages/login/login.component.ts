@@ -7,7 +7,7 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 
 @Component({
   selector: 'app-login',
-  standalone: true, // ✅ Define que este componente é standalone
+  standalone: true, 
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   imports: [CommonModule, ReactiveFormsModule, InputTextModule, ButtonModule, FloatLabelModule], 

@@ -23,7 +23,7 @@
   
         <!-- Senha -->
         <p-floatLabel>
-          <p-password id="password" formControlName="password" class="w-full" [toggleMask]="true" ></p-password>
+          <p-password id="password" formControlName="password" class="w-full" [toggleMask]="true" [inputStyle]="{'width': '100%'}" [style]="{'width': '100%'}" ></p-password>
           <label for="password">Senha</label>
         </p-floatLabel>
         <small class="text-red-500" *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
@@ -32,7 +32,7 @@
   
         <!-- Confirmar Senha -->
         <p-floatLabel>
-          <p-password id="confirmPassword" formControlName="confirmPassword" class="w-full" [toggleMask]="true" inputStyleClass="w-full"></p-password>
+          <p-password id="confirmPassword" formControlName="confirmPassword" class="w-full" [toggleMask]="true" [inputStyle]="{'width': '100%'}" [style]="{'width': '100%'}" ></p-password>
           <label for="confirmPassword">Confirmar Senha</label>
         </p-floatLabel>
         <small class="text-red-500" *ngIf="registerForm.hasError('passwordsMismatch') && registerForm.get('confirmPassword')?.touched">
