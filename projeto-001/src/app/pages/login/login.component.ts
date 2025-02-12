@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { FloatLabelModule } from 'primeng/floatlabel';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,8 +15,8 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 })
 export class LoginComponent {
   loginForm: FormGroup;
-
-  constructor(private fb: FormBuilder) {
+ 
+  constructor(private fb: FormBuilder,private router: Router) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -26,6 +27,7 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       console.log('Formulário válido:', this.loginForm.value);
       // Aqui você pode chamar o serviço de autenticação para login
+      this.router.navigate(['home']);
     } else {
       console.log('Formulário inválido');
     }
