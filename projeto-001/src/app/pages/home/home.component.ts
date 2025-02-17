@@ -12,7 +12,10 @@ export class HomeComponent {
   turmas: any[] = [];
   alunos: any[] = [];
 
-  constructor(private turmaAlunoService: TurmaAlunoService) {}
+  constructor(private turmaAlunoService: TurmaAlunoService) {
+    this.turmas = this.turmaAlunoService.getTurmas();
+    this.alunos = this.turmaAlunoService.getAlunos();
+  }
 
   calcularMediaGeral(): number {
     const total = this.alunos.reduce((sum, aluno) => sum + aluno.media, 0);
