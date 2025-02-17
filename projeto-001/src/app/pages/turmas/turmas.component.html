@@ -1,0 +1,40 @@
+<div class="p-6">
+    <h2 class="text-xl font-bold mb-4 text-gray-800">Turmas</h2>
+    <button pButton label="Cadastrar Nova Turma" class="mb-4" (click)="openNew()"></button>
+    <p-table [value]="turmas" class="w-full">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Nome</th>
+          <th>Descrição</th>
+          <th>Ações</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-turma>
+        <tr>
+          <td>{{ turma.nome }}</td>
+          <td>{{ turma.descricao }}</td>
+          <td>
+            <button pButton icon="pi pi-pencil" class="mr-2" (click)="editTurma(turma)"></button>
+            <button pButton icon="pi pi-trash" (click)="deleteTurma(turma)"></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+    <p-dialog [(visible)]="displayDialog" [modal]="true">
+      <form [formGroup]="turmaForm" (ngSubmit)="onSubmit()">
+        <div class="mb-4">
+          <label for="nome" class="block font-medium mb-2">Nome</label>
+          <input id="nome" pInputText formControlName="nome" class="w-full" />
+        </div>
+        <div class="mb-4">
+          <label for="descricao" class="block font-medium mb-2">Descrição</label>
+          <input id="descricao" pInputText formControlName="descricao" class="w-full" />
+        </div>
+        <div class="flex justify-end gap-2">
+          <button pButton type="button" label="Cancelar" class="p-button-secondary" (click)="displayDialog=false"></button>
+          <button pButton type="submit" label="Salvar" class="p-button-primary" [disabled]="turmaForm.invalid"></button>
+        </div>
+      </form>
+    </p-dialog>
+  </div>
