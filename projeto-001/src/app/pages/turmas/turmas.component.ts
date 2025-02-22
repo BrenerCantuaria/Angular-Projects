@@ -6,6 +6,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { DialogModule } from 'primeng/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { consumerMarkDirty } from '@angular/core/primitives/signals';
 
 interface Turma {
   id?: number;
@@ -31,7 +33,7 @@ export class TurmasComponent {
   editing: boolean = false;
   selectedTurma: Turma | null = null;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router) {
     this.turmaForm = this.fb.group({
       nome: ['', Validators.required],
       descricao: ['', Validators.required]
@@ -77,5 +79,11 @@ export class TurmasComponent {
     if (confirm('Tem certeza que deseja excluir esta turma?')) {
       this.turmas = this.turmas.filter(t => t.id !== turma.id);
     }
+  }
+
+  navegarParaCadastro(turma: Turma) {
+    console.log(turma.id)
+    console.log(`clicado`)
+    this.router.navigate([`/turmas/${turma.id}/cadastrar-alunos`]);
   }
 }

@@ -7,6 +7,7 @@
           <th>Nome</th>
           <th>Descrição</th>
           <th>Ações</th>
+          <th>Adicionar alunos</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-turma>
@@ -16,6 +17,9 @@
           <td>
             <button pButton icon="pi pi-pencil" class="mr-2" (click)="editTurma(turma)"></button>
             <button pButton icon="pi pi-trash" (click)="deleteTurma(turma)"></button>
+          </td>
+          <td>
+            <button pButton icon="pi pi-users" (click)="navegarParaCadastro(turma)"></button>
           </td>
         </tr>
       </ng-template>
