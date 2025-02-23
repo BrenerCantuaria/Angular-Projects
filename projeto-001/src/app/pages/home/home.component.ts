@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table'; // Importe o TableModule
 import { TurmaAlunoService } from './home.service';
+import { PrimeIcons, MenuItem } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
 @Component({
   selector: 'app-home',
-  imports: [CommonModule,TableModule],
+  imports: [CommonModule,TableModule,ButtonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
