@@ -13,7 +13,7 @@ export const routes: Routes = [
         path: '',
         component: LayoutComponent, // Aplica o layout à home
         children: [
-          { path: 'home', component: HomeComponent },
+          { path: '', component: HomeComponent },
           { path: 'dashboard', component: DashboardComponent},
           { path: 'turmas', component: TurmasComponent},
           { path: 'perfil', component: ProfileComponent},
