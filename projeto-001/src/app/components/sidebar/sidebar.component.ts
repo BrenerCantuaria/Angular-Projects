@@ -17,8 +17,8 @@ export class SidebarComponent {
   constructor() {
     this.items = [
       { label: 'Home', icon: 'pi pi-home', routerLink: '/' },
-      { label: 'Dashboard', icon: 'pi pi-chart-line', routerLink: '/dashboard' },
       { label: 'Turmas', icon: 'pi pi-users', routerLink: '/turmas' },
+      { label: 'Alunos', icon: 'pi pi-id-card', routerLink: '/alunos' },
       { label: 'Perfil', icon: 'pi pi-user', routerLink: '/perfil' },
 
     ];
