@@ -36,7 +36,7 @@ export class CadastrarAlunoModalComponent {
   cadastrarAluno() {
     if (this.alunoForm.valid && this.editando == false) {
       const alunoData = { ...this.alunoForm.value };
-      this.alunoCadastrado.emit(alunoData); // Envia os dados do aluno para o componente pai
+      this.alunoCadastrado.emit(alunoData); 
       this.alunoForm.reset();
       this.closeModal();
     }
@@ -45,7 +45,5 @@ export class CadastrarAlunoModalComponent {
     this.alunoForm.patchValue(aluno);
     this.displayModal = true;
     this.editando = true;
-    // this.alunoForm.reset();
-    // this.closeModal();
   }
 }
