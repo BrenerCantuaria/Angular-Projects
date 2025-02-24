@@ -1,1 +1,20 @@
-<p>cadastrar-aluno-modal works!</p>
+<p-dialog [(visible)]="displayModal" [modal]="true" header="Cadastrar Aluno" [style]="{width: '400px'}">
+  <form [formGroup]="alunoForm" (ngSubmit)="cadastrarAluno()" class="space-y-4">
+    <div>
+      <label for="nome" class="block font-medium">Nome</label>
+      <input id="nome" pInputText formControlName="nome" class="w-full" />
+    </div>
+    <div>
+      <label for="email" class="block font-medium">Email</label>
+      <input id="email" pInputText formControlName="email" class="w-full" />
+    </div>
+    <div>
+      <label for="dataNascimento" class="block font-medium">Data de Nascimento</label>
+      <input id="dataNascimento" pInputText formControlName="dataNascimento" type="date" class="w-full" />
+    </div>
+    <div class="flex justify-end gap-2">
+      <button pButton type="button" label="Cancelar" class="p-button-secondary" (click)="closeModal()"></button>
+      <button pButton type="submit" label="Salvar" class="p-button-primary" [disabled]="alunoForm.invalid"></button>
+    </div>
+  </form>
+</p-dialog>
