@@ -11,33 +11,15 @@
         </p-iconfield>
       </ng-template>
       <ng-template #end>
-        <p-button icon="pi pi-user-plus" label="Cadastrar Aluno" severity="secondary" (click)="displayModal = true"></p-button>
+        <p-button icon="pi pi-user-plus" label="Cadastrar Aluno" severity="secondary" (click)="openModalCadastro()"></p-button>
       </ng-template>
     </p-toolbar>
   </div>
-  
+
   <p-toast></p-toast>
 
-  <p-dialog [(visible)]="displayModal" [modal]="true" header="Cadastrar Aluno" [style]="{width: '400px'}">
-    <form [formGroup]="alunoForm" (ngSubmit)="cadastrarAluno()" class="space-y-4">
-      <div>
-        <label for="nome" class="block font-medium">Nome</label>
-        <input id="nome" pInputText formControlName="nome" class="w-full" />
-      </div>
-      <div>
-        <label for="email" class="block font-medium">Email</label>
-        <input id="email" pInputText formControlName="email" class="w-full" />
-      </div>
-      <div>
-        <label for="dataNascimento" class="block font-medium">Data de Nascimento</label>
-        <input id="dataNascimento" pInputText formControlName="dataNascimento" type="date" class="w-full" />
-      </div>
-      <div class="flex justify-end gap-2">
-        <button pButton type="button" label="Cancelar" class="p-button-secondary" (click)="displayModal = false"></button>
-        <button pButton type="submit" label="Salvar" class="p-button-primary" [disabled]="alunoForm.invalid"></button>
-      </div>
-    </form>
-  </p-dialog>
+  <!-- Modal de cadastro de aluno -->
+  <app-cadastrar-aluno-modal #modalCadastro (alunoCadastrado)="adicionarAluno($event)"></app-cadastrar-aluno-modal>
 
   <ng-container *ngIf="alunos.length === 0">
     <div class="text-center p-6 border rounded-lg shadow-md w-full md:w-1/2 bg-gray-50">
@@ -46,9 +28,9 @@
     </div>
   </ng-container>
 
-  <p-table *ngIf="alunos.length > 0" [value]="alunosFiltrados" class="w-full mt-6 " [paginator]="true" [rows]="10">
+  <p-table *ngIf="alunos.length > 0" [value]="alunos" class="w-full mt-6" [paginator]="true" [rows]="10">
     <ng-template pTemplate="header">
-      <tr >
+      <tr>
         <th><i class="pi pi-user"></i> Nome</th>
         <th><i class="pi pi-envelope"></i> Email</th>
         <th><i class="pi pi-calendar"></i> Idade</th>
