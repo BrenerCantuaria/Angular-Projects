@@ -32,15 +32,31 @@ export class CadastrarAlunoModalComponent {
   closeModal() {
     this.displayModal = false;
   }
+  calcularIdade(dataNascimento: Date): number {
+    const hoje = new Date();
+    let idade = hoje.getFullYear() - dataNascimento.getFullYear();
+    const mesAtual = hoje.getMonth();
+    const mesNascimento = dataNascimento.getMonth();
+
+    // Ajuste caso o aluno ainda não tenha feito aniversário neste ano
+    if (mesNascimento > mesAtual || (mesNascimento === mesAtual && hoje.getDate() < dataNascimento.getDate())) {
+      idade--;
+    }
+
+    return idade;
+  }
 
   cadastrarAluno() {
     if (this.alunoForm.valid && this.editando == false) {
       const alunoData = { ...this.alunoForm.value };
+      alunoData.idade = this.calcularIdade(new Date(alunoData.dataNascimento)); // Adiciona a idade ao objeto
+  
       this.alunoCadastrado.emit(alunoData); 
       this.alunoForm.reset();
       this.closeModal();
     }
   }
+  
   editarAluno(aluno: any) {
     this.alunoForm.patchValue(aluno);
     this.displayModal = true;
