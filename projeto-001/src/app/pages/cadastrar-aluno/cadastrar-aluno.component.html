@@ -43,8 +43,8 @@
         <td>{{ aluno.email }}</td>
         <td>{{ aluno.idade }}</td>
         <td>
-          <button pButton icon="pi pi-pencil" class="mr-2"></button>
-          <button pButton icon="pi pi-trash"></button>
+          <button pButton icon="pi pi-pencil" class="mr-2" (click)="editarAluno(aluno)"></button>
+          <button pButton icon="pi pi-trash" (click)="removerAluno(aluno)"></button>
         </td>
       </tr>
     </ng-template>
