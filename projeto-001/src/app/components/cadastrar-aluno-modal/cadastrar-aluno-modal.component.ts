@@ -45,5 +45,7 @@ export class CadastrarAlunoModalComponent {
     this.alunoForm.patchValue(aluno);
     this.displayModal = true;
     this.editando = true;
+    this.alunoForm.reset();
+    this.closeModal();
   }
 }
