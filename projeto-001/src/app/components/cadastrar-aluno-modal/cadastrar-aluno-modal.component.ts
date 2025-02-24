@@ -15,6 +15,7 @@ export class CadastrarAlunoModalComponent {
   @Output() alunoCadastrado = new EventEmitter<any>(); // Emite evento ao cadastrar aluno
   displayModal = false;
   alunoForm: FormGroup;
+  editando: boolean = false;
 
   constructor(private fb: FormBuilder) {
     this.alunoForm = this.fb.group({
@@ -39,5 +40,10 @@ export class CadastrarAlunoModalComponent {
       this.alunoForm.reset();
       this.closeModal();
     }
+  }
+  editarAluno(aluno: any) {
+    this.alunoForm.patchValue(aluno);
+    this.displayModal = true;
+    this.editando = true;
   }
 }
