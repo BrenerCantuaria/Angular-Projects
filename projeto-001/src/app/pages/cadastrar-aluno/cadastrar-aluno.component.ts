@@ -71,39 +71,6 @@ export class CadastrarAlunoComponent implements OnInit {
     });
   }
 
-  calcularIdade(dataNascimento: Date): number {
-    const hoje = new Date();
-    let idade = hoje.getFullYear() - dataNascimento.getFullYear();
-    const mesAtual = hoje.getMonth();
-    const mesNascimento = dataNascimento.getMonth();
-
-    // Ajuste caso o aluno ainda não tenha feito aniversário neste ano
-    if (mesNascimento > mesAtual || (mesNascimento === mesAtual && hoje.getDate() < dataNascimento.getDate())) {
-      idade--;
-    }
-
-    return idade;
-  }
-
-  cadastrarAluno() {
-    if (this.alunoForm.valid) {
-      const dadosFormulario = this.alunoForm.value;
-      const dataNascimento = new Date(dadosFormulario.dataNascimento);
-      const idadeCalculada = this.calcularIdade(dataNascimento);
-
-      const novoAluno = {
-        nome: dadosFormulario.nome,
-        email: dadosFormulario.email,
-        idade: idadeCalculada, // Agora a idade está sendo corretamente atribuída
-        turmaId: this.turmaId
-      };
-
-      this.adicionarAluno(novoAluno)
-
-      this.alunoForm.reset();
-      this.modalCadastro.closeModal();
-    }
-  }
   adicionarAluno(novoAluno: any) {
     this.alunos.push(novoAluno);
     this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Aluno cadastrado!' });
