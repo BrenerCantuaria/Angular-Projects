@@ -8,6 +8,7 @@ import { TurmasComponent } from './pages/turmas/turmas.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { CadastrarAlunoComponent } from './pages/cadastrar-aluno/cadastrar-aluno.component';
 import { AlunosComponent } from './pages/alunos/alunos.component';
+import { RecuperarSenhaComponent } from './pages/recuperar-senha/recuperar-senha.component';
 
 export const routes: Routes = [
     {
@@ -24,5 +25,6 @@ export const routes: Routes = [
     },
 
     {path: 'login',component: LoginComponent},
-    {path: 'register',component: RegisterComponent}
+    {path: 'register',component: RegisterComponent},
+    { path: 'recuperar-senha', component: RecuperarSenhaComponent },
 ];

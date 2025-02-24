@@ -1,1 +1,36 @@
-<p>recuperar-senha works!</p>
+<div class="h-screen flex items-center justify-center bg-gray-100">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-96">
+      <h2 class="text-2xl font-semibold text-center mb-4 text-stone-950">Recuperar Senha</h2>
+  
+      <form [formGroup]="recuperarSenhaForm" (ngSubmit)="onSubmit()" class="space-y-6">
+        <p-floatLabel>
+          <input
+            pInputText
+            id="email"
+            type="email"
+            formControlName="email"
+            autocomplete="off"
+            class="w-full"
+          />
+          <label for="email">E-mail</label>
+        </p-floatLabel>
+        <small class="text-red-500" *ngIf="recuperarSenhaForm.get('email')?.invalid && recuperarSenhaForm.get('email')?.touched">
+          E-mail inválido
+        </small>
+  
+        <button
+          pButton
+          type="submit"
+          label="Enviar Link"
+          class="w-full text-white font-semibold py-2 px-4 rounded-lg"
+          [disabled]="recuperarSenhaForm.invalid"
+        >
+        </button>
+      </form>
+  
+      <div class="text-center mt-4 text-sm">
+        <a routerLink="/login" class="text-blue-500 hover:underline">Voltar para Login</a>
+      </div>
+    </div>
+  </div>
+  
