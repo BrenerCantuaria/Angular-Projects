@@ -27,7 +27,7 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       console.log('Formulário válido:', this.loginForm.value);
       // Aqui você pode chamar o serviço de autenticação para login
-      this.router.navigate(['home']);
+      this.router.navigate(['']);
     } else {
       console.log('Formulário inválido');
     }
