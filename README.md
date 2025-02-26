@@ -27,10 +27,6 @@ A estrutura do repositório foi pensada para facilitar a navegação e o entendi
 │   ├── projeto1/             # Descrição detalhada do projeto 1
 │   └── projeto2/             # Descrição detalhada do projeto 2
 │
-├── components/               # Componentes reutilizáveis
-│   ├── component1/           # Exemplo de componente 1
-│   └── component2/           # Exemplo de componente 2
-│
 ├── notes/                    # Anotações e resumos sobre Angular
 │   ├── introducao.md         # Conceitos básicos do Angular
 │   └── avancado.md           # Conceitos mais avançados
