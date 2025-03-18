@@ -9,22 +9,26 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { CadastrarAlunoComponent } from './pages/cadastrar-aluno/cadastrar-aluno.component';
 import { AlunosComponent } from './pages/alunos/alunos.component';
 import { RecuperarSenhaComponent } from './pages/recuperar-senha/recuperar-senha.component';
+import { LoginAuthGuard } from './services/login-auth.guard';
 
 export const routes: Routes = [
-    {
-        path: '',
-        component: LayoutComponent, // Aplica o layout à home
-        children: [
-          { path: '', component: HomeComponent },
-          { path: 'turmas', component: TurmasComponent},
-          { path: 'alunos', component: AlunosComponent},
-          { path: 'perfil', component: ProfileComponent},
-          { path: 'turmas/:id/cadastrar-alunos', component: CadastrarAlunoComponent }
+  {
+    path: '',
+    component: LayoutComponent, // Aplica o layout à home
+    canActivate: [LoginAuthGuard],
+    children: [
+      { path: '', component: HomeComponent },
+      { path: 'turmas', component: TurmasComponent },
+      { path: 'alunos', component: AlunosComponent },
+      { path: 'perfil', component: ProfileComponent },
+      {
+        path: 'turmas/:id/cadastrar-alunos',
+        component: CadastrarAlunoComponent,
+      },
+    ],
+  },
 
-        ]
-    },
-
-    {path: 'login',component: LoginComponent},
-    {path: 'register',component: RegisterComponent},
-    { path: 'recuperar-senha', component: RecuperarSenhaComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'recuperar-senha', component: RecuperarSenhaComponent },
 ];
