@@ -1,5 +1,26 @@
-<div class="w-64 bg-blue-900 text-white h-screen p-5">
-  <h2 class="text-lg font-bold mb-5">Menu</h2>
-  
-  <p-panelMenu [model]="items" class="w-full"></p-panelMenu>
+<div>
+  <p-menubar [model]="items">
+    <ng-template #start> </ng-template>
+    <ng-template #item let-item let-root="root">
+      <a
+        pRipple
+        class="flex items-center p-menubar-item-link"
+        href="{{ item.routerLink }}"
+      >
+        <i class=" {{ item.icon }}"> </i>
+        <span>{{ item.label }}</span>
+      </a>
+    </ng-template>
+    <ng-template #end>
+      <div class="flex items-center gap-2">
+        <input type="text" pInputText placeholder="Search" class="w-36" />
+        <p-avatar
+          class="cursor-pointer"
+          image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+          shape="circle"
+          (click)="getRouterUsuario()"
+        />
+      </div>
+    </ng-template>
+  </p-menubar>
 </div>
