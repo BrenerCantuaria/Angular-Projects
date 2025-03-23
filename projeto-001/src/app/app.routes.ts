@@ -15,7 +15,7 @@ export const routes: Routes = [
   {
     path: '',
     component: LayoutComponent, // Aplica o layout à home
-    canActivate: [LoginAuthGuard],
+    // canActivate: [LoginAuthGuard],
     children: [
       { path: '', component: HomeComponent },
       { path: 'turmas', component: TurmasComponent },

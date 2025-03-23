@@ -27,6 +27,6 @@ export const appConfig: ApplicationConfig = {
       },
     }),
     provideHttpClient(withFetch()),
-    { provide: HTTP_INTERCEPTORS, useClass: LoginAuthInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: LoginAuthInterceptor, multi: true },
   ],
 };
