@@ -1,0 +1,20 @@
+<div class="flex flex-col items-center">
+    <p-fileUpload mode="basic" accept=".xls,.xlsx" auto="true"
+      chooseLabel="Upload Excel" (onSelect)="onUpload($event)"
+      class="p-button-secondary flex items-center gap-2"
+      >
+      <i class="pi pi-upload mr-2"></i>
+    </p-fileUpload>
+  
+    <!-- Indicador de carregamento -->
+    <div *ngIf="isLoading" class="flex items-center mt-2 text-blue-600">
+        <p-progressSpinner [style]="{ width: '25px', height: '25px' }" (strokeWidth)="4"></p-progressSpinner>
+        <span class="ml-2">Carregando...</span>
+    </div>
+  
+    <!-- Exibir nome do arquivo carregado -->
+    <div *ngIf="uploadedFileName && !isLoading" class="mt-2 text-green-700 text-sm">
+      <i class="pi pi-check-circle"></i> {{ uploadedFileName }} carregado!
+    </div>
+</div>
+  
