@@ -1,0 +1,117 @@
+<div class="bg-gray-100 min-h-screen p-6">
+  <!-- Banner -->
+  <div class="relative rounded-lg overflow-hidden shadow-md mb-6">
+    <img
+      src="https://images.unsplash.com/photo-1555664424-778a1e5e1b48?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGFyZHVpbm98ZW58MHx8MHx8fDA%3D"
+      class="w-full h-48 object-cover"
+      alt="Turma Banner"
+    />
+    <div
+      class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center p-6 text-white"
+    >
+      <h2 class="text-3xl font-bold">Prog. µControladores</h2>
+      <p class="text-lg">Todas as Eng.</p>
+      <p class="text-sm">Sala: A204</p>
+    </div>
+  </div>
+
+  <!-- Navegação das Abas -->
+  <div class="flex gap-4 border-b mb-4 text-gray-600">
+    <button
+      class="pb-2 border-b-2"
+      [class.border-blue-600]="tabSelecionado === 'mural'"
+      (click)="tabSelecionado = 'mural'"
+    >
+      Mural
+    </button>
+    <button
+      class="pb-2 border-b-2"
+      [class.border-blue-600]="tabSelecionado === 'atividades'"
+      (click)="tabSelecionado = 'atividades'"
+    >
+      Atividades
+    </button>
+    <button
+      class="pb-2 border-b-2"
+      [class.border-blue-600]="tabSelecionado === 'materiais'"
+      (click)="tabSelecionado = 'materiais'"
+    >
+      Materiais
+    </button>
+  </div>
+
+  <!-- Conteúdo Condicional -->
+  <div *ngIf="tabSelecionado === 'mural'" class="space-y-4">
+    <!-- Campo de aviso -->
+    <div class="bg-white rounded-lg shadow p-4">
+      <div class="flex gap-3 items-center">
+        <div
+          class="bg-purple-500 text-white w-10 h-10 flex items-center justify-center rounded-full font-bold"
+        >
+          M
+        </div>
+        <input
+          type="text"
+          placeholder="Escreva um aviso para sua turma"
+          class="w-full bg-gray-100 rounded-md p-2 focus:outline-none text-gray-600"
+        />
+      </div>
+    </div>
+
+    <!-- Postagens -->
+    <div
+      *ngFor="let post of posts"
+      class="bg-white rounded-lg shadow p-4 flex items-start gap-3"
+    >
+      <i class="pi pi-book text-2xl text-orange-500"></i>
+      <div>
+        <p class="font-semibold text-gray-800">{{ post.titulo }}</p>
+        <p class="text-sm text-gray-500">{{ post.data }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Atividades -->
+  <div *ngIf="tabSelecionado === 'atividades'" class="space-y-4">
+    <div class="flex justify-end">
+      <button
+        pButton
+        icon="pi pi-plus"
+        label="Nova Atividade"
+        class="p-button-sm p-button-primary"
+        (click)="abrirModalAtividade()"
+      ></button>
+    </div>
+    <div
+      *ngFor="let atividade of atividades"
+      class="bg-white rounded-lg shadow p-4"
+    >
+      <h3 class="text-lg font-semibold text-gray-800">
+        {{ atividade.titulo }}
+      </h3>
+      <p class="text-sm text-gray-500">Prazo: {{ atividade.prazo }}</p>
+    </div>
+
+    <!-- Modal -->
+    <app-criar-atividade-modal
+      #modalAtividade
+      (atividadeCriada)="adicionarAtividade($event)"
+    ></app-criar-atividade-modal>
+  </div>
+
+  <!-- Materiais -->
+  <div *ngIf="tabSelecionado === 'materiais'" class="space-y-4">
+    <div
+      *ngFor="let material of materiais"
+      class="bg-white rounded-lg shadow p-4"
+    >
+      <h3 class="text-lg font-semibold text-gray-800">{{ material.titulo }}</h3>
+      <a
+        [href]="material.link"
+        target="_blank"
+        class="text-blue-600 text-sm underline"
+        >Acessar material</a
+      >
+    </div>
+  </div>
+</div>
