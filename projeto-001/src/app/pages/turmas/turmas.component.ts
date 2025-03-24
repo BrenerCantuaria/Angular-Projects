@@ -7,7 +7,6 @@ import { DialogModule } from 'primeng/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { consumerMarkDirty } from '@angular/core/primitives/signals';
 
 interface Turma {
   id?: number;
@@ -18,15 +17,23 @@ interface Turma {
 @Component({
   selector: 'app-turmas',
   template: ``,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, TableModule, ButtonModule, InputTextModule, DialogModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    TableModule,
+    ButtonModule,
+    InputTextModule,
+    DialogModule,
+  ],
   templateUrl: './turmas.component.html',
   styleUrl: './turmas.component.css',
-  schemas: [NO_ERRORS_SCHEMA]
+  schemas: [NO_ERRORS_SCHEMA],
 })
 export class TurmasComponent {
   turmas: Turma[] = [
     { id: 1, nome: 'Turma A', descricao: 'Matemática Avançada' },
-    { id: 2, nome: 'Turma B', descricao: 'Física para Iniciantes' }
+    { id: 2, nome: 'Turma B', descricao: 'Física para Iniciantes' },
   ];
   displayDialog: boolean = false;
   turmaForm: FormGroup;
@@ -36,7 +43,7 @@ export class TurmasComponent {
   constructor(private fb: FormBuilder, private router: Router) {
     this.turmaForm = this.fb.group({
       nome: ['', Validators.required],
-      descricao: ['', Validators.required]
+      descricao: ['', Validators.required],
     });
   }
 
@@ -52,7 +59,7 @@ export class TurmasComponent {
     this.selectedTurma = { ...turma };
     this.turmaForm.setValue({
       nome: turma.nome,
-      descricao: turma.descricao
+      descricao: turma.descricao,
     });
     this.displayDialog = true;
   }
@@ -66,10 +73,14 @@ export class TurmasComponent {
   saveTurma() {
     const turmaData = this.turmaForm.value;
     if (this.editing && this.selectedTurma) {
-      const index = this.turmas.findIndex(t => t.id === this.selectedTurma!.id);
+      const index = this.turmas.findIndex(
+        (t) => t.id === this.selectedTurma!.id
+      );
       this.turmas[index] = { ...this.selectedTurma, ...turmaData };
     } else {
-      const newId = this.turmas.length ? Math.max(...this.turmas.map(t => t.id || 0)) + 1 : 1;
+      const newId = this.turmas.length
+        ? Math.max(...this.turmas.map((t) => t.id || 0)) + 1
+        : 1;
       this.turmas.push({ id: newId, ...turmaData });
     }
     this.displayDialog = false;
@@ -77,13 +88,13 @@ export class TurmasComponent {
 
   deleteTurma(turma: Turma) {
     if (confirm('Tem certeza que deseja excluir esta turma?')) {
-      this.turmas = this.turmas.filter(t => t.id !== turma.id);
+      this.turmas = this.turmas.filter((t) => t.id !== turma.id);
     }
   }
 
   navegarParaCadastro(turma: Turma) {
-    console.log(turma.id)
-    console.log(`clicado`)
-    this.router.navigate([`/turmas/${turma.id}/cadastrar-alunos`]);
+    console.log(turma.id);
+    console.log(`clicado`);
+    this.router.navigate([`/turmas/${turma.id}/turmadetalhes`]);
   }
 }
