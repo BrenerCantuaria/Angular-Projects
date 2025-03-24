@@ -10,6 +10,7 @@ import { CadastrarAlunoComponent } from './pages/cadastrar-aluno/cadastrar-aluno
 import { AlunosComponent } from './pages/alunos/alunos.component';
 import { RecuperarSenhaComponent } from './pages/recuperar-senha/recuperar-senha.component';
 import { LoginAuthGuard } from './services/login-auth.guard';
+import { TurmadetalhesComponent } from './pages/turmadetalhes/turmadetalhes.component';
 
 export const routes: Routes = [
   {
@@ -22,8 +23,8 @@ export const routes: Routes = [
       { path: 'alunos', component: AlunosComponent },
       { path: 'perfil', component: ProfileComponent },
       {
-        path: 'turmas/:id/cadastrar-alunos',
-        component: CadastrarAlunoComponent,
+        path: 'turmas/:id/turmadetalhes',
+        component: TurmadetalhesComponent,
       },
     ],
   },
