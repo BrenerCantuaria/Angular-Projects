@@ -7,11 +7,14 @@ import { DialogModule } from 'primeng/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { MenuModule } from 'primeng/menu';
 interface Turma {
   id?: number;
   nome: string;
   descricao: string;
+  background?: string;
+  backgroundType: string;
 }
 
 @Component({
@@ -25,6 +28,8 @@ interface Turma {
     ButtonModule,
     InputTextModule,
     DialogModule,
+    RadioButtonModule,
+    MenuModule,
   ],
   templateUrl: './turmas.component.html',
   styleUrl: './turmas.component.css',
@@ -32,18 +37,33 @@ interface Turma {
 })
 export class TurmasComponent {
   turmas: Turma[] = [
-    { id: 1, nome: 'Turma A', descricao: 'Matemática Avançada' },
-    { id: 2, nome: 'Turma B', descricao: 'Física para Iniciantes' },
+    {
+      id: 1,
+      nome: 'Turma A',
+      descricao: 'Matemática Avançada',
+      background: '#ffffff',
+      backgroundType: 'color',
+    },
+    {
+      id: 2,
+      nome: 'Turma B',
+      descricao: 'Física para Iniciantes',
+      background: '#ffffff',
+      backgroundType: 'color',
+    },
   ];
   displayDialog: boolean = false;
   turmaForm: FormGroup;
   editing: boolean = false;
   selectedTurma: Turma | null = null;
-
+  backgroundType: string = 'color'; // Define se é cor ou imagem
+  imagensDisponiveis: string[] = ['/img2.jpg', '/img3.jpg', '/img4.jpg'];
   constructor(private fb: FormBuilder, private router: Router) {
     this.turmaForm = this.fb.group({
       nome: ['', Validators.required],
       descricao: ['', Validators.required],
+      backgroundType: ['color'],
+      background: ['#ffffff'],
     });
   }
 
@@ -57,10 +77,15 @@ export class TurmasComponent {
   editTurma(turma: Turma) {
     this.editing = true;
     this.selectedTurma = { ...turma };
+
+    const isImage = turma.background && turma.background.startsWith('/');
     this.turmaForm.setValue({
       nome: turma.nome,
       descricao: turma.descricao,
+      backgroundType: isImage ? 'image' : 'color',
+      background: turma.background || '#ffffff',
     });
+
     this.displayDialog = true;
   }
 
@@ -96,5 +121,8 @@ export class TurmasComponent {
     console.log(turma.id);
     console.log(`clicado`);
     this.router.navigate([`/turmas/${turma.id}/turmadetalhes`]);
+  }
+  selecionarImagem(img: string) {
+    this.turmaForm.patchValue({ background: img });
   }
 }
