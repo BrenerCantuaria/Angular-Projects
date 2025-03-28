@@ -38,6 +38,14 @@
     >
       Materiais
     </button>
+    <button
+      class="pb-2 border-b-2"
+      [class.border-blue-600]="tabSelecionado === 'participantes'"
+      (click)="tabSelecionado = 'participantes'"
+      (click)="carregarAluno()"
+    >
+      Participantes
+    </button>
   </div>
 
   <!-- Conteúdo Condicional -->
@@ -82,14 +90,56 @@
         (click)="abrirModalAtividade()"
       ></button>
     </div>
+
+    <!-- Lista de atividades com acordeão -->
     <div
-      *ngFor="let atividade of atividades"
-      class="bg-white rounded-lg shadow p-4"
+      *ngFor="let atividade of atividades; let i = index"
+      class="bg-white rounded-lg shadow"
     >
-      <h3 class="text-lg font-semibold text-gray-800">
-        {{ atividade.titulo }}
-      </h3>
-      <p class="text-sm text-gray-500">Prazo: {{ atividade.prazo }}</p>
+      <button
+        (click)="atividade.expanded = !atividade.expanded"
+        class="w-full text-left px-4 py-3 flex justify-between items-center hover:bg-gray-100"
+      >
+        <div class="flex items-center gap-3">
+          <!-- Ícone de atividade -->
+          <div
+            class="bg-orange-100 text-orange-600 rounded-full w-10 h-10 flex items-center justify-center text-xl"
+          >
+            <i class="pi pi-book"></i>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold text-gray-800">
+              {{ atividade.titulo }}
+            </h3>
+            <div *ngIf="atividade.prazo != null">
+              <p class="text-sm text-gray-500">Prazo: {{ atividade.prazo }}</p>
+            </div>
+            <p class="text-sm text-gray-500">
+              Publicado: {{ atividade.publicado }}
+            </p>
+          </div>
+        </div>
+      </button>
+
+      <!-- Detalhes (accordion) -->
+      <div
+        *ngIf="atividade.expanded"
+        class="border-t px-4 py-3 text-sm text-gray-600 space-y-2 bg-gray-50 transition-all"
+      >
+        <p>
+          <strong>Descrição:</strong>
+          {{ atividade.descricao || "Sem descrição." }}
+        </p>
+
+        <ng-container *ngIf="atividade.arquivo">
+          <p class="flex items-center gap-2">
+            <i class="pi pi-paperclip text-gray-500"></i>
+            <a target="_blank" class="text-blue-600 hover:underline">{{
+              atividade.arquivo
+            }}</a>
+          </p>
+        </ng-container>
+      </div>
     </div>
 
     <!-- Modal -->
@@ -112,6 +162,16 @@
         class="text-blue-600 text-sm underline"
         >Acessar material</a
       >
+    </div>
+  </div>
+
+  <!-- Participantes -->
+  <div *ngIf="tabSelecionado === 'participantes'" class="space-y-4">
+    <div
+      *ngFor="let aluno of listaDeAlunos"
+      class="bg-white rounded-lg shadow p-4"
+    >
+      <h3 class="text-lg font-semibold text-gray-800">{{ aluno.nome }}</h3>
     </div>
   </div>
 </div>
