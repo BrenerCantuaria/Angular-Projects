@@ -1,0 +1,41 @@
+<div class="flex flex-wrap justify-center gap-4">
+  <div class="p-4" *ngFor="let turma of turmas">
+    <p-card [style]="{ width: '25rem', overflow: 'hidden' }">
+      <ng-template #header>
+        <img
+          alt="Turma"
+          class="w-full h-40 object-cover"
+          src="https://primefaces.org/cdn/primeng/images/card-ng.jpg"
+        />
+      </ng-template>
+      <ng-template #title>
+        {{ turma.nome }}
+      </ng-template>
+      <ng-template #subtitle>
+        Status:
+        <span
+          class="px-2 py-1 rounded-full text-white text-xs font-semibold"
+          [ngClass]="{
+            'bg-green-600': turma.status === 'Ativa',
+            'bg-red-600': turma.status === 'Inativa'
+          }"
+        >
+          {{ turma.status }}
+        </span>
+      </ng-template>
+      <p>
+        Período: {{ turma.periodo }} <br />
+        Número de alunos: {{ turma.alunos }}
+      </p>
+      <ng-template #footer>
+        <div class="flex gap-4 mt-1">
+          <p-button
+            label="Ver Detalhes"
+            class="w-full"
+            [routerLink]="['/turmas', turma.id, 'turmadetalhes']"
+          ></p-button>
+        </div>
+      </ng-template>
+    </p-card>
+  </div>
+</div>
