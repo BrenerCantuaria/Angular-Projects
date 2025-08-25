@@ -102,5 +102,3 @@ Espero que este repositório seja útil para você e outros desenvolvedores. �
 🔨🤖🔧 **Vamos codar!**
 
 ---
-
-✨ **Dica:** Se você for usar imagens no repositório, considere adicionar capturas de tela dos projetos ou GIFs demonstrando funcionalidades. Isso deixará o repositório mais atraente!
